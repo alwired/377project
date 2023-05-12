@@ -1,0 +1,109 @@
+html {
+    background-color: #fff;
+    font-size: 16px;
+    min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+  
+    
+    font-family: ‘Segoe UI’, Candara, ‘Bitstream Vera Sans’, ‘DejaVu Sans’, ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: rgba(252, 234, 196, 0.575);
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    flex: 1 0 auto;
+}
+
+.container {
+    margin: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex:1;
+}
+
+.left {
+    background-color: rgb(247, 209, 209);
+    flex: 0 1 auto;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .left_half {
+    display: flex;
+    flex-direction: row
+    justify-content: space-between;
+} */
+
+.right {
+    background-color: rgb(247, 209, 209);
+    flex: 0 1 auto;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    padding: 0px;
+  }
+  
+  
+.header h1 {
+    display:flex;
+    background-color: rgba(230, 14, 14, 0.384);
+    color: #000000;
+  
+    border-radius: 6px;
+    font-size: 1.5rem;
+    padding: 1.25rem;
+    margin: 0;
+  
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
+    width: 100%;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-shrink: 0;
+    padding: 1rem;
+    background-color: rgba(214, 236, 10, 0.329);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* .footer a {
+    display: flex;
+    flex-direction: flex;
+    flex: 1 0 auto;
+} */
+
+.box {
+    background-color: rgb(247, 209, 209);
+    border: 3px solid;
+    border-color: #a8a8a88a;
+    border-radius: 4px;
+    width: auto
+}
+
