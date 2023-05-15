@@ -11,6 +11,7 @@ html {
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    
 }
 
 body {
@@ -19,6 +20,7 @@ body {
   
     
     font-family: ‘Segoe UI’, Candara, ‘Bitstream Vera Sans’, ‘DejaVu Sans’, ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
+    
     font-weight: 400;
     line-height: 1.5;
     background-color: rgba(252, 234, 196, 0.575);
@@ -35,7 +37,7 @@ body {
 .container {
     margin: 0px;
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
     align-items: start;
     flex:1;
 }
@@ -47,7 +49,10 @@ body {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    word-wrap: break-word;
+    width: 198.34px;
 }
+
 
 /* .left_half {
     display: flex;
@@ -76,7 +81,7 @@ body {
     color: #000000;
   
     border-radius: 6px;
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 1.25rem;
     margin: 0;
   
@@ -106,13 +111,10 @@ body {
     border: 3px solid;
     border-color: #a8a8a88a;
     border-radius: 4px;
-    width: auto
+    width: auto;
+    color:#000000;
 }
 
-.left {
-    word-wrap: break-word;
-    width: 198.34px;
-}
 
 .dropdown-content>button{
     border: none;
@@ -188,4 +190,33 @@ body {
 
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
+}
+
+.about {
+    text-decoration: underline;
+}
+
+.about_container {
+    background-color: rgb(247, 209, 209);
+    flex: 0 1 auto;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: left;
+    
+}
+
+.about {
+    font-size: 1.2rem;
+}
+
+.content {
+    font-size: 0.95rem;
+}
+
+.para {
+    margin: 1rem;
+    margin-left: 0;
 }
