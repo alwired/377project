@@ -40,7 +40,7 @@ async function main(){
     // click screen
     document.addEventListener('click', async (event) => {
         event.stopPropagation();
-        console.log('clicked screen');
+        // console.log('clicked screen');
         dropdownButton.classList.remove('is-active')
     })
 
@@ -61,7 +61,14 @@ async function main(){
             console.log('clicked' + event.target.id);
             document.querySelector('#year').textContent = event.target.id + "\u00A0\u00A0▼";
             dropdownButton.classList.remove('is-active');
+
             year = event.target.id;
+
+            if (parseInt(year) != 2023) {
+                document.querySelector('.warning').textContent = event.target.id + " data not available.";
+            } else {
+                document.querySelector('.warning').textContent = "";
+            }
         })
     })
 
@@ -75,7 +82,9 @@ async function main(){
         if (localStorage.length == 0) {
             localStorage.setItem('localData', '[]');
             console.log("fetching and combining")
-            for (let page = 1; page < 1; page++) {
+            document.querySelector('.warning').textContent = "Loading data. This may\u000Atake a few minutes.";
+            for (let page = 1; page < 85; page++) {
+                // 100 is max allowed
                 const res = await fetch("https://api.umd.io/v1/courses/sections?per_page=100&page=" + page);
                 const res_json = await res.json();
                 // console.log('parts:')
@@ -85,6 +94,7 @@ async function main(){
                 const new_localData = JSON.parse(localStorage.getItem('localData')).concat(res_json);
                 localStorage.setItem('localData', JSON.stringify(new_localData));
             }
+            document.querySelector('.warning').textContent = "";
             console.log("fetched all data");
             // console.log(localStorage.getItem('localData'))
         }
@@ -95,8 +105,14 @@ async function main(){
         
         data = JSON.parse(localData);
         
-        // getAggregated(data, year);
-
+        const aggData = getAggregated(data, year);
+        const aggDiff = aggData[0];
+        const aggSeats = aggData[1];
+        let normalized = Map();
+        aggDiff.forEach((major) => {
+            normalized.set(major, aggDiff[major] )
+        })
+        
     })
 
 
