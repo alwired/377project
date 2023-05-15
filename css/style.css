@@ -220,3 +220,14 @@ body {
     margin: 1rem;
     margin-left: 0;
 }
+
+.textimage {
+    display: flex
+    
+}
+
+image {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
