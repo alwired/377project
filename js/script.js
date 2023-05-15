@@ -1,6 +1,3 @@
-
-
-
 function getAggregated(data, year) {
     let majorDiff = new Map();
     let majorSeats = new Map();
