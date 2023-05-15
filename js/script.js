@@ -1,8 +1,25 @@
 
 
 
-function updateSelection(year) {
-    document.querySelector('#')
+function getAggregated(data, year) {
+    let majorDiff = new Map();
+    let majorSeats = new Map();
+    data.forEach((section) => {
+        if (section['semester'].slice(0, 4) == String(year)) {
+            const major = section['course'].slice(0, 4);
+            const diff = parseInt(section['open_seats']) - parseInt(section['waitlist']);
+            const seats = parseInt(section['seats']);
+            if (!majorDiff.has(major)) {
+                majorDiff.set(major, 0);
+                majorSeats.set(major, 0);
+            }
+            const oldDiff = majorDiff.get(major);
+            const oldSeats = majorSeats.get(major);
+            majorDiff.set(major, diff + oldDiff);
+            majorSeats.set(major, seats + oldSeats);
+        }
+    })
+    return [majorDiff, majorSeats];
 }
 
 async function main(){
@@ -10,7 +27,7 @@ async function main(){
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     const generate = document.querySelector('#generate');
     const localData = localStorage.getItem('localData');
-
+    let year = 0;
     
     // console.log(localData);
 
@@ -45,7 +62,9 @@ async function main(){
         item.addEventListener('click', async (event) => {
             event.stopPropagation();
             console.log('clicked' + event.target.id);
-            document.querySelector('#year').textContent = event.target.id + "\u00A0\u00A0▼"
+            document.querySelector('#year').textContent = event.target.id + "\u00A0\u00A0▼";
+            dropdownButton.classList.remove('is-active');
+            year = event.target.id;
         })
     })
 
@@ -55,10 +74,11 @@ async function main(){
             console.log("existing data")
             // console.log(localData)
         }
+        console.log(year);
         if (localStorage.length == 0) {
             localStorage.setItem('localData', '[]');
             console.log("fetching and combining")
-            for (let page = 1; page < 85; page++) {
+            for (let page = 1; page < 1; page++) {
                 const res = await fetch("https://api.umd.io/v1/courses/sections?per_page=100&page=" + page);
                 const res_json = await res.json();
                 // console.log('parts:')
@@ -78,7 +98,8 @@ async function main(){
         
         data = JSON.parse(localData);
         
-        
+        // getAggregated(data, year);
+
     })
 
 
