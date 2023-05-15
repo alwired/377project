@@ -2,8 +2,8 @@
 https://alwired.github.io/377project/
 
 ### Target Browsers
-Chrome 4.0+, Edge 12.0+, Firefox 2.0+, Opera 12.1+, Safari 4.0+, IE 9.0+, Anroid Browser 3.0+
-The site is intended for desktop use, but works on mobile as well.
+Chrome 46+, Edge 12+, Firefox 16+, Opera 37+, Safari 8+, Android Browser 113+  
+The site is tailored for desktop use, but works on mobile as well.
 
 ### Description
 API: https://beta.umd.io/  
