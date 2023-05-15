@@ -106,4 +106,23 @@ body {
     border-radius: 4px;
     width: auto
 }
+.dropdown-content>button{
+    border: none;
+    background: none;
+    /* font-weight: bold; */
+}
 
+#arrow {
+    height: 1rem;
+    width: 1rem;
+    color:#000000;
+    border-color: #000000;
+}
+
+.dropdown {
+    margin: 1rem;
+}
+
+#generate {
+    margin: 1rem;
+}

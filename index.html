@@ -1,32 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>UMD Overflow</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="wrapper">
-        <div class="header">
-            <h1>Header</h1>
-        </div>
-        <div class="container">
-            <div class="left_half">
-                <div class="left box">
-                    <div class="info">info</div>
-                    <div class="selection">
-                        Semester:
-                    </div>
+      <div class="header">
+        <h1>Header</h1>
+      </div>
+      <div class="container">
+        <div class="left_half">
+          <div class="left box">
+            <div class="info">info</div>
+            <div class="dropdown" id="dd_container">
+              <div class="dropdown-trigger">
+                <button
+                  class="button"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu"
+                >
+                  <span id="year">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</span>
+                  <!-- doesn't work <span class="icon is-small">
+                    <i class="fas fa-angle-down" id="arrow" aria-hidden="true"></i>
+                  </span> -->
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <button type="button" class="dropdown-item" id="2019">2019</button>
+                  <hr class="dropdown-divider" />
+                  <button type="button" class="dropdown-item" id="2020">2021</button>
+                  <hr class="dropdown-divider" />
+                  <button type="button" class="dropdown-item" id="2021">2020</button>
                 </div>
+              </div>
             </div>
-            <div class="right">graph</div>
+            <button type="button" id="generate">Generate Results</button>
+          </div>
         </div>
-        <div class="footer">
-            <a href="">Home</a>
-            <a href="">About</a>
+        <div class="right">
+            <div id="graph_display">
+                
+            </div>
         </div>
+      </div>
+      <div class="footer">
+        <a href="">Home</a>
+        <a href="">About</a>
+      </div>
     </div>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
