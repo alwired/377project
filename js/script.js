@@ -19,6 +19,28 @@ function getAggregated(data, year) {
     return [majorDiff, majorSeats];
 }
 
+
+function getExtremes(map, reverse) {
+    let sorted;
+    if (!reverse) {
+        sorted = new Map([...map.entries()].sort((a, b) => b[1] - a[1]));
+    } else {
+        sorted = new Map([...map.entries()].sort((a, b) => a[1] - b[1]));
+    }
+    let extremes = new Map();
+    let i = 0; 
+    for (const [key, val] of sorted) {
+        extremes.set(key, val);
+        console.log(key + ":" + val);
+        i += 1;
+        if (i == 10) {
+            break;
+        }
+    }
+    return extremes;
+}
+
+
 async function main(){
     const dropdownButton = document.querySelector('#dd_container');
     const dropdownItems = document.querySelectorAll('.dropdown-item');
@@ -104,14 +126,20 @@ async function main(){
         // console.log(res_json)
         
         data = JSON.parse(localData);
-        
+
         const aggData = getAggregated(data, year);
-        const aggDiff = aggData[0];
-        const aggSeats = aggData[1];
-        let normalized = Map();
-        aggDiff.forEach((major) => {
-            normalized.set(major, aggDiff[major] )
-        })
+        const aggDiff = new Map(aggData[0]);
+        const aggSeats = new Map(aggData[1]);
+        
+        let normalized = new Map();
+        
+        for (const [major, val] of aggDiff) {
+            normalized.set(major, val / aggSeats.get(major));
+        } 
+
+        const topMajors = getExtremes(normalized, 0);
+        const bottomMajors = getExtremes(normalized, 1);
+        
         
     })
 
