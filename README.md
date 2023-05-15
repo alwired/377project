@@ -6,9 +6,9 @@ Chrome 4.0+, Edge 12.0+, Firefox 2.0+, Opera 12.1+, Safari 4.0+, IE 9.0+, Anroid
 The site is intended for desktop use, but works on mobile as well.
 
 ### Description
-API: https://beta.umd.io/
-JS libraries: Highcharts 11.0.1
-CSS frameworks: Bulma 0.9.4
+API: https://beta.umd.io/  
+JS libraries: Highcharts 11.0.1  
+CSS frameworks: Bulma 0.9.4  
 
 The goal of this project is to compare the difference between open seats and waitlisted students across UMD majors. Since I use a single-value metric, it's logical to use a bar chart to visualize these differences using charts from the Highcharts library.
 
