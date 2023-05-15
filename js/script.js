@@ -31,7 +31,7 @@ function getExtremes(map, reverse) {
     let i = 0; 
     for (const [key, val] of sorted) {
         extremes.set(key, val);
-        console.log(key + ":" + val);
+        // console.log(key + ":" + val);
         i += 1;
         if (i == 10) {
             break;
@@ -40,6 +40,72 @@ function getExtremes(map, reverse) {
     return extremes;
 }
 
+function plot(topMajors, bottomMajors) {
+    document.querySelector('.right').classList.remove('hidden')
+    Highcharts.chart('container', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'UMD Majors by Course Enrollment Difficulty',
+            align: 'left'
+        },
+        subtitle: {
+            text: 'Difference between a major\'s open seats and waitlisted students, scaled by total available seats. Displaying worst 10 and best 10.',
+            align: 'left'
+        },
+        xAxis: {
+            categories: [...bottomMajors.keys()].concat([...topMajors.keys()].reverse()),
+            title: {
+                text: null
+            },
+            gridLineWidth: 1,
+            lineWidth: 0,
+        },
+        yAxis: {
+            min: -0.2,
+            title: {
+                text: 'Major',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            },
+            gridLineWidth: 0
+        },
+        // tooltip: {
+        //     valueSuffix: ''
+        // },
+        plotOptions: {
+            bar: {
+                borderRadius: '50%',
+                dataLabels: {
+                    enabled: false
+                },
+                groupPadding: .1
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true,
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            data: [...bottomMajors.values()].concat([...topMajors.values()].reverse())
+        }]
+    });
+    
+}
 
 async function main(){
     const dropdownButton = document.querySelector('#dd_container');
@@ -47,11 +113,10 @@ async function main(){
     const generate = document.querySelector('#generate');
     const localData = localStorage.getItem('localData');
     let year = 0;
+    let data = JSON.parse(localData);
     
     // console.log(localData);
 
-    let data = JSON.parse(localData);
-    
     // click menu
     dropdownButton.addEventListener('click', async (event) => {
         event.stopPropagation();
@@ -130,6 +195,7 @@ async function main(){
         const aggData = getAggregated(data, year);
         const aggDiff = new Map(aggData[0]);
         const aggSeats = new Map(aggData[1]);
+
         
         let normalized = new Map();
         
@@ -140,9 +206,13 @@ async function main(){
         const topMajors = getExtremes(normalized, 0);
         const bottomMajors = getExtremes(normalized, 1);
         
+        console.log(topMajors, bottomMajors);
+    
+        plot(topMajors, bottomMajors);
         
     })
 
+    
 
 }
 

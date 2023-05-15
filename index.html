@@ -14,12 +14,12 @@
   <body>
     <div class="wrapper">
       <div class="header">
-        <h1>Header</h1>
+        <h1>UMD Overflow</h1>
       </div>
       <div class="container">
         <div class="left_half">
           <div class="left box">
-            <div class="info">info</div>
+            <div class="info">Select Year</div>
             <div class="dropdown" id="dd_container">
               <div class="dropdown-trigger">
                 <button
@@ -47,10 +47,10 @@
             <div class="warning"></div>
           </div>
         </div>
-        <div class="right">
-            <div id="graph_display">
-                
-            </div>
+        <div class="right hidden">
+          <figure class="highcharts-figure">
+            <div id="container"></div>
+        </figure>
         </div>
       </div>
       <div class="footer">
@@ -59,5 +59,9 @@
       </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
   </body>
 </html>
