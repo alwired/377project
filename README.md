@@ -2,7 +2,7 @@
 https://alwired.github.io/377project/
 
 ### Target Browsers
-Chrome 46+, Edge 12+, Firefox 16+, Opera 37+, Safari 8+, Android Browser 113+
+Chrome 46+, Edge 12+, Firefox 16+, Opera 37+, Safari 8+, Android Browser 113+  
 The site is tailored for desktop use, but works on mobile as well.
 
 ### Description
