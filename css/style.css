@@ -110,6 +110,8 @@ body {
   border-radius: 4px;
   width: auto;
   color: #000000;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    0 0 0 1px rgb(10 10 10 / 2%);
 }
 
 .dropdown-content > button {
@@ -152,7 +154,7 @@ body {
 }
 
 #container {
-  height: 650px;
+  height: 655px;
   width: 900px;
 }
 
@@ -327,4 +329,8 @@ body {
   margin: 1rem;
   margin-bottom: 0.6rem;
   width: 114px;
+}
+
+#expl {
+  max-width: 182.4px;
 }
