@@ -244,8 +244,8 @@ async function main(){
                 // }
             }
 
-            console.log("1");
-            console.log(localData);
+            // console.log("1");
+            // console.log(localData);
 
             // if (!data || data.length < 2) {
             //     warning.textContent = "API request failed.";
