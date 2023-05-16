@@ -1,5 +1,5 @@
 # UMD Overflow
-https://alwired.github.io/377project/
+https://alwired.github.io/377project/index.html
 
 ### Compatibility
 Chrome 46+, Edge 12+, Firefox 16+, Opera 37+, Safari 8+, Android Browser 113+
