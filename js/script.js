@@ -258,7 +258,7 @@ async function main(){
         
         data = JSON.parse(localData);
         if (!data || data.length < 2) {
-                warning.textContent = "Error. Click generate again.";
+                warning.textContent = "Error. Try clicking generate again. If that doesn't work, the API likely failed.";
                 warning.classList.remove('hidden');
             } else {
             warning.textContent = "";
