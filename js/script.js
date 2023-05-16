@@ -230,12 +230,18 @@ async function main(){
                 // 100 is max allowed
                 const res = await fetch("https://api.umd.io/v1/courses/sections?per_page=100&page=" + page);
                 const res_json = await res.json();
+                console.log("fetched " + page);
                 // console.log('parts:')
                 // console.log(localStorage.getItem('localData'))
                 // console.log(res_json);
 
                 const new_localData = JSON.parse(localStorage.getItem('localData')).concat(res_json);
                 localStorage.setItem('localData', JSON.stringify(new_localData));
+
+                // if (page == 84) {
+                //     console.log(localStorage);
+                //     console.log(localStorage);
+                // }
             }
 
             console.log("1");
@@ -256,9 +262,9 @@ async function main(){
         
         // console.log(res_json)
         
-        data = JSON.parse(localData);
+        data = JSON.parse(localStorage.getItem('localData'));
         if (!data || data.length < 2) {
-                warning.textContent = "Error. Try clicking generate again. If that doesn't work, the API likely failed.";
+                warning.textContent = "Error. Try clicking generate again or refreshing. If that doesn't work, the API likely failed.";
                 warning.classList.remove('hidden');
             } else {
             warning.textContent = "";
