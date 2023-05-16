@@ -58,7 +58,7 @@ function plot(topMajors, bottomMajors) {
             type: 'bar'
         },
         title: {
-            text: 'UMD Majors by Course Enrollment Difficulty',
+            text: 'UMD Departments by Course Enrollment Difficulty',
             align: 'left'
         },
         subtitle: {
