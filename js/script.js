@@ -19,7 +19,6 @@ function getAggregated(data, year) {
     return [majorDiff, majorSeats];
 }
 
-
 function getExtremes(map, reverse) {
     let sorted;
     if (!reverse) {
@@ -40,6 +39,18 @@ function getExtremes(map, reverse) {
     return extremes;
 }
 
+function filterBySeats(diff, seats, min) {
+    let newDiff = new Map();
+    let newSeats = new Map();
+    for (const [dept, val] of seats) {
+        if (val >= min) {
+            newDiff.set(dept, diff.get(dept));
+            newSeats.set(dept, val);
+        }
+    }
+    return [newDiff, newSeats];
+}
+
 function plot(topMajors, bottomMajors) {
     document.querySelector('.right').classList.remove('hidden')
     Highcharts.chart('container', {
@@ -57,7 +68,7 @@ function plot(topMajors, bottomMajors) {
         xAxis: {
             categories: [...bottomMajors.keys()].concat([...topMajors.keys()].reverse()),
             title: {
-                text: null
+                text: "Department"
             },
             gridLineWidth: 1,
             lineWidth: 0,
@@ -65,7 +76,7 @@ function plot(topMajors, bottomMajors) {
         yAxis: {
             min: -0.2,
             title: {
-                text: 'Major',
+                text: '(open - waitlist) / total',
                 align: 'high'
             },
             labels: {
@@ -96,6 +107,7 @@ function plot(topMajors, bottomMajors) {
             backgroundColor:
                 Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
             shadow: true,
+            enabled: false
         },
         credits: {
             enabled: false
@@ -111,11 +123,19 @@ async function main(){
     const dropdownButton = document.querySelector('#dd_container');
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     const generate = document.querySelector('#generate');
+    const filterInput = document.querySelector('#input');
+    const filterContainer = document.querySelector('#filter_container');
+    const filterButton = document.querySelector('#filter_button');
+    const warning = document.querySelector('.warning');
     const localData = localStorage.getItem('localData');
-    let year = 0;
     let data = JSON.parse(localData);
+    let year = 0;
+    let aggDiff;
+    let aggSeats;
+    let min = 0;
     
     // console.log(localData);
+
 
     // click menu
     dropdownButton.addEventListener('click', async (event) => {
@@ -129,6 +149,7 @@ async function main(){
         event.stopPropagation();
         // console.log('clicked screen');
         dropdownButton.classList.remove('is-active')
+        filterInput.classList.remove('is-info');
     })
 
     // hover items
@@ -152,11 +173,43 @@ async function main(){
             year = event.target.id;
 
             if (parseInt(year) != 2023) {
-                document.querySelector('.warning').textContent = event.target.id + " data not available.";
+                document.querySelector('.warning').textContent = event.target.id + " data is not available.";
+                generate.classList.add('hidden');
+                warning.classList.remove('hidden');
             } else {
                 document.querySelector('.warning').textContent = "";
+                generate.classList.remove('hidden');
+                warning.classList.add('hidden');
             }
         })
+    })
+
+    // click filter input
+    filterInput.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        filterInput.classList.add('is-info');
+    })
+
+    // text input
+    filterInput.addEventListener('input', async (event) => {
+        min = event.target.value;
+    })
+
+    // click filter button
+    filterButton.addEventListener('click', async (event) => {
+        const seats = min;
+        const newAgg = filterBySeats(aggDiff, aggSeats, seats);
+        const newDiff = newAgg[0];
+        const newSeats = newAgg[1];
+
+        let newNormalized = new Map();
+        for (const [major, val] of newDiff) {
+            newNormalized.set(major, val / newSeats.get(major));
+        }
+
+        const topMajors = getExtremes(newNormalized, 0);
+        const bottomMajors = getExtremes(newNormalized, 1);
+        plot(topMajors, bottomMajors);
     })
 
     // load & display
@@ -193,9 +246,17 @@ async function main(){
         data = JSON.parse(localData);
 
         const aggData = getAggregated(data, year);
-        const aggDiff = new Map(aggData[0]);
-        const aggSeats = new Map(aggData[1]);
+        aggDiff = new Map(aggData[0]);
+        aggSeats = new Map(aggData[1]);
 
+        // const filtered = new Map();
+        // for (const [dept, val] of aggSeats) {
+        //     if (val > 100) {
+        //         filtered.set(dept, val);
+        //     }
+        // }
+
+        // console.log(filtered)
         
         let normalized = new Map();
         
@@ -206,8 +267,8 @@ async function main(){
         const topMajors = getExtremes(normalized, 0);
         const bottomMajors = getExtremes(normalized, 1);
         
-        console.log(topMajors, bottomMajors);
-    
+        // console.log(topMajors, bottomMajors);
+        filterContainer.classList.remove('hidden');
         plot(topMajors, bottomMajors);
         
     })
@@ -218,5 +279,4 @@ async function main(){
 
 document.addEventListener('DOMContentLoaded', async () => main()); 
 
-//todo: hide generate
-// why refresh change localdata?
+//todo: hide generate, fix mobile on main (menu & graph), display table, color bars

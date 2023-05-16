@@ -19,7 +19,7 @@
       <div class="container">
         <div class="left_half">
           <div class="left box">
-            <div class="info">Select Year</div>
+            <div class="info">Select year:</div>
             <div class="dropdown" id="dd_container">
               <div class="dropdown-trigger">
                 <button
@@ -51,11 +51,20 @@
                 </div>
               </div>
             </div>
-            <button type="button" id="generate">Generate Results</button>
-            <div class="warning"></div>
+            <button class="hidden" type="button" id="generate">Generate Results</button>
+            <div class="warning hidden"></div>
+            <div id="filter_container" class="hidden">
+              <div class="info">
+                Min seats:
+              </div>
+              <div class="filter">
+                <input class="input is-info" id="input" type="text" placeholder="100">
+              </div>
+              <button type="button" id="filter_button">Filter</button>
+            </div>
           </div>
         </div>
-        <div class="right hidden">
+        <div class="right box hidden">
           <figure class="highcharts-figure">
             <div id="container"></div>
           </figure>
