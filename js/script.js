@@ -219,7 +219,7 @@ async function main(){
             console.log("existing data")
             // console.log(localData)
         }
-        console.log(year);
+        
         if (localStorage.length == 0) {
             localStorage.setItem('localData', '[]');
             console.log("fetching and combining")
@@ -238,13 +238,17 @@ async function main(){
                 localStorage.setItem('localData', JSON.stringify(new_localData));
             }
 
-            if (!data || data.length < 2) {
-                warning.textContent = "API request failed. Type localStorage.clear() in console and refreshing.";
-                warning.classList.add('hidden');
-            }
-            warning.textContent = "";
-            warning.classList.add('hidden')
+            console.log("1");
+            console.log(localData);
+
+            // if (!data || data.length < 2) {
+            //     warning.textContent = "API request failed.";
+            //     warning.classList.remove('hidden');
+            // }
+            // warning.textContent = "";
+            // warning.classList.add('hidden')
             console.log("fetched all data");
+            
             // console.log(localStorage.getItem('localData'))
         }
         
@@ -253,6 +257,15 @@ async function main(){
         // console.log(res_json)
         
         data = JSON.parse(localData);
+        if (!data || data.length < 2) {
+                warning.textContent = "API request failed.";
+                warning.classList.remove('hidden');
+            } else {
+            warning.textContent = "";
+            warning.classList.add('hidden')
+        }
+        // console.log(localData);
+        // console.log(data);
         const aggData = getAggregated(data, year);
         aggDiff = new Map(aggData[0]);
         aggSeats = new Map(aggData[1]);
