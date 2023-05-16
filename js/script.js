@@ -126,8 +126,9 @@ async function main(){
     const filterInput = document.querySelector('#input');
     const filterContainer = document.querySelector('#filter_container');
     const filterButton = document.querySelector('#filter_button');
-    const warning = document.querySelector('.warning');
+    const warning = document.querySelector('#warning');
     const localData = localStorage.getItem('localData');
+ 
     let data = JSON.parse(localData);
     let year = 0;
     let aggDiff;
@@ -222,7 +223,9 @@ async function main(){
         if (localStorage.length == 0) {
             localStorage.setItem('localData', '[]');
             console.log("fetching and combining")
-            document.querySelector('.warning').textContent = "Loading data. This may\u000Atake a few minutes.";
+            warning.textContent = "Loading data. This may\u000Atake a few minutes.";
+            warning.classList.remove('hidden');
+
             for (let page = 1; page < 85; page++) {
                 // 100 is max allowed
                 const res = await fetch("https://api.umd.io/v1/courses/sections?per_page=100&page=" + page);
@@ -234,7 +237,13 @@ async function main(){
                 const new_localData = JSON.parse(localStorage.getItem('localData')).concat(res_json);
                 localStorage.setItem('localData', JSON.stringify(new_localData));
             }
-            document.querySelector('.warning').textContent = "";
+
+            if (!data || data.length < 2) {
+                warning.textContent = "API request failed. Type localStorage.clear() in console and refreshing.";
+                warning.classList.add('hidden');
+            }
+            warning.textContent = "";
+            warning.classList.add('hidden')
             console.log("fetched all data");
             // console.log(localStorage.getItem('localData'))
         }
@@ -244,7 +253,6 @@ async function main(){
         // console.log(res_json)
         
         data = JSON.parse(localData);
-
         const aggData = getAggregated(data, year);
         aggDiff = new Map(aggData[0]);
         aggSeats = new Map(aggData[1]);
